@@ -40,6 +40,31 @@ echo -e "\n${txtylw} * Disable user directories modules${txtrst}
 }
 
 sgs_info_module () {
-echo -e "\n${txtylw} * Disable user directories modules${txtrst}
+echo -e "\n${txtylw} * Disable info module${txtrst}
   >> Reference: "
 }
+
+###################################################
+# SUGGESTIONS CHAPTER 3
+###################################################
+
+sgs_define_user () {
+echo -e "\n${txtylw} * Define user in httpd.conf${txtrst}
+  >> Reference: "
+}
+
+sgs_define_group () {
+echo -e "\n${txtylw} * Define group in httpd.conf${txtrst}
+  >> Reference: "
+}
+
+sgs_less_uid () {
+echo -e "\n${txtylw} * Make sure the defined user in httpd.conf has a uid which is less than UID_MIN${txtrst}
+  >> Reference: "
+}
+
+sgs_non_root () {
+echo -e "\n${txtylw} * Make sure the Apache web server is run by a non root user${txtrst}
+  >> Reference: "
+}
+

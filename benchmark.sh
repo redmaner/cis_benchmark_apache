@@ -40,7 +40,7 @@ echo -e "
   ___   _   ____         ___     _    _____
  / __) (_) (  __)  __   / __)   / \  (_  __)
 ( (__  | | _\ \   (__) ( (__   / ^ \   | |
- \___) |_|(___)         \___) /_/ \_\  |_|
+ \___) |_|(____)        \___) /_/ \_\  |_|
 
 "
 echo -e "BENCHMARK - APACHE VERSION 2.4"
@@ -106,6 +106,45 @@ if [ '$(httpd -M | egrep "info_module")' != "" ]; then
 else
 	echo -e " - Info module is disabled                   $status_ok\n"
 fi
+
+###################################################
+# AUDIT CHAPTER 3: PRINCIPLES, PERMISSIONS AND OWNERSHIP
+###################################################
+
+echo -e "\n${txtblu}Chapter 3: Principles, permissions and ownership${txtrst}\n"
+
+# 3.1 Apache web server is run by a non-root user
+apache_user=$(grep -i '^User' $apache_conf | cut -d" " -f2)
+apache_user_uid=$(id $apache_user | cut -d'=' -f2 | cut -d'(' -f1)
+user_uid_min=$(grep '^UID_MIN' /etc/login.defs | cut -d" " -f2)
+
+if [ $apache_user == "" ]; then
+	echo -e " - User is not commented out in httpd.conf   $status_wrn"
+	suggestions="$suggestions sgs_define_user"
+else
+	echo -e " - User is not commented out in httpd.conf    $status_ok"
+fi
+
+if [ '$(grep -i '^Group' '$apache_conf')' == "" ]; then
+	echo -e " - Group is not commented out in httpd.conf   $status_wrn"
+	suggestions="$suggestions sgs_define_group"
+else
+	echo -e " - Group is not commented out in httpd.conf   $status_ok"
+fi
+
+if [ "$apache_user_uid" -ge "$user_uid_min" ]; then
+	echo -e " - User ($apache_user) uid ($apache_user_uid) is less than $user_uid_min     $status_wrn"
+	suggestions="$suggestions sgs_uid_less"
+else
+	echo -e " - User ($apache_user) uid ($apache_user_uid) is less than $user_uid_min     $status_ok"
+fi
+
+if [ $(ps axu | grep httpd | grep -v root | cut -d" " -f1 | grep $apache_user) == "" ]; then
+	echo -e " - Apache web server is run by non-root user  $status_wrn\n"
+	suggestions="$suggestions sgs_non_root"
+else
+	echo -e " - Apache web server is run by non-root user  $status_ok\n"
+fi 
 
 # Show suggestions after audit
 echo -e "${txtblu}SUGGESTIONS:${txtrst}"
