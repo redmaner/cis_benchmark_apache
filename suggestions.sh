@@ -5,42 +5,42 @@
 ###################################################
 
 sgs_auth_modules () {
-echo -e "\n${txtylw} * Enable Only Necessary Authentication and Authorization Modules${txtrst}
+echo -e "\n${txtylw}$string_suggestions_c2_21${txtrst}
   >> Reference: "
 }
 
 sgs_log_config_module () {
-echo -e "\n${txtylw} * Enable the log config module${txtrst}
+echo -e "\n${txtylw}$string_suggestions_c2_22${txtrst}
   >> Reference: "
 }
 
 sgs_webdav_module () {
-echo -e "\n${txtylw} * Disable WebDAV modules${txtrst}
+echo -e "\n${txtylw}$string_suggestions_c2_23${txtrst}
   >> Reference: "
 }
 
 sgs_status_module () {
-echo -e "\n${txtylw} * Disable status module${txtrst}
+echo -e "\n${txtylw}$string_suggestions_c2_24${txtrst}
   >> Reference: "
 }
 
 sgs_autoindex_module () {
-echo -e "\n${txtylw} * Disable autoindex module${txtrst}
+echo -e "\n${txtylw}$string_suggestions_c2_25${txtrst}
   >> Reference: "
 }
 
 sgs_proxy_module () {
-echo -e "\n${txtylw} * Disable proxy modules${txtrst}
+echo -e "\n${txtylw}$string_suggestions_c2_26${txtrst}
   >> Reference: "
 }
 
 sgs_user_dir_module () {
-echo -e "\n${txtylw} * Disable user directories modules${txtrst}
+echo -e "\n${txtylw}$string_suggestions_c2_27${txtrst}
   >> Reference: "
 }
 
 sgs_info_module () {
-echo -e "\n${txtylw} * Disable info module${txtrst}
+echo -e "\n${txtylw}$string_suggestions_c2_28${txtrst}
   >> Reference: "
 }
 
@@ -49,22 +49,22 @@ echo -e "\n${txtylw} * Disable info module${txtrst}
 ###################################################
 
 sgs_define_user () {
-echo -e "\n${txtylw} * Define user in httpd.conf${txtrst}
+echo -e "\n${txtylw}$string_suggestions_c3_31_1${txtrst}
   >> Reference: "
 }
 
 sgs_define_group () {
-echo -e "\n${txtylw} * Define group in httpd.conf${txtrst}
+echo -e "\n${txtylw}$string_suggestions_c3_31_2${txtrst}
   >> Reference: "
 }
 
 sgs_less_uid () {
-echo -e "\n${txtylw} * Make sure the defined user in httpd.conf has a uid which is less than UID_MIN${txtrst}
+echo -e "\n${txtylw}$string_suggestions_c3_31_3${txtrst}
   >> Reference: "
 }
 
 sgs_non_root () {
-echo -e "\n${txtylw} * Make sure the Apache web server is run by a non root user${txtrst}
+echo -e "\n${txtylw}$string_suggestions_c3_31_4${txtrst}
   >> Reference: "
 }
 

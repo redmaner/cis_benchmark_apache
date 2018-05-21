@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# General strings
+string_status_ok="OK"
+string_status_warning="WARNING"
+string_version="Version"
+
+# Strings chapter 2
+string_c2_title="Chapter 2: Minimize Apache modules"
+string_c2_22=" - Log Config Module is enabled"
+string_c2_23=" - WebDAV modules are disabled"
+string_c2_24=" - Status module is disabled"
+string_c2_25=" - Autoindex module is disabled"
+string_c2_26=" - Proxy modules are disabled"
+string_c2_27=" - User directories modules are disabled"
+string_c2_28=" - Info module is disabled"
+
+# Strings chapter 3
+string_c3_title="Chapter 3: Principles, permissions and ownership"
+string_c3_31_1=" - User is not commented out in httpd.conf"
+string_c3_31_2=" - Group is not commented out in httpd.conf"
+string_c3_31_3=" - User ($apache_user) uid ($apache_user_uid) is less than $user_uid_min"
+string_c3_31_4=" - Apache web server is run by non-root user"
+
+# Suggestions 
+string_suggestions_title="SUGGESTIONS:"
+string_suggestions_c2_21=" * Enable Only Necessary Authentication and Authorization Modules"
+string_suggestions_c2_22=" * Enable the log config module"
+string_suggestions_c2_23=" * Disable WebDAV modules"
+string_suggestions_c2_24=" * Disable status module"
+string_suggestions_c2_25=" * Disable autoindex module"
+string_suggestions_c2_26=" * Disable proxy modules"
+string_suggestions_c2_27=" * Disable user directories modules"
+string_suggestions_c2_28=" * Disable info module"
+
+string_suggestions_c3_31_1=" * Define user in httpd.conf"
+string_suggestions_c3_31_2=" * Define group in httpd.conf"
+string_suggestions_c3_31_3=" * Make sure the defined user in httpd.conf has a uid which is less than UID_MIN"
+string_suggestions_c3_31_4=" * Make sure the Apache web server is run by a non root user"
