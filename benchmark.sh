@@ -18,7 +18,7 @@ case `uname -s` in
 esac
 
 up=$PWD
-exec 2> /dev/null
+exec 2> $up/error.log
 clear
 
 # Languages
@@ -29,8 +29,9 @@ status_ok="[${txtgrn}$string_status_ok${txtrst}]"
 status_wrn="[${txtred}$string_status_warning${txtrst}]"
 
 # Apache 
-apache_dir=/etc/httpd
-apache_conf=$apache_dir/conf/httpd.conf
+apache_bin=apache2
+apache_dir=/etc/apache2
+apache_conf=$apache_dir/apache2.conf
 apache_confs=$(grep -i "Include *.conf" $apache_conf | grep -v '#Include')
 
 
@@ -55,7 +56,7 @@ echo -e "BENCHMARK - APACHE VERSION 2.4"
 echo -e "\n${txtblu}$string_c2_title${txtrst}\n"
 
 # 2.2 Log Config Module
-if [ "$(httpd -M | grep log_config)" == "" ]; then
+if [ "$($apache_bin -M | grep log_config)" == "" ]; then
 	echo -e "$string_c2_22    $status_wrn\n"
 	suggestions="$suggestions sgs_log_config_module"
 else
@@ -63,7 +64,7 @@ else
 fi
 
 # 2.3 WebDAV modules are disabled
-if [ "$(httpd -M | grep ' dav_[[:print:]]+module')" != "" ]; then
+if [ "$($apache_bin -M | grep ' dav_[[:print:]]+module')" != "" ]; then
 	echo -e "$string_c2_23    $status_wrn\n"
 	suggestions="$suggestions sgs_webdav_module"
 else
@@ -71,7 +72,7 @@ else
 fi
 
 # 2.4 Status Module is disabled
-if [ '$(httpd -M | egrep "status_module")' != "" ]; then
+if [ '$($apache_bin -M | egrep "status_module")' != "" ]; then
 	echo -e "$string_c2_24    $status_wrn\n"
 	suggestions="$suggestions sgs_status_module"
 else
@@ -79,7 +80,7 @@ else
 fi
 
 # 2.5 Autoindex Module is disabled
-if [ "$(httpd -M | grep autoindex_module)" != "" ]; then
+if [ "$($apache_bin -M | grep autoindex_module)" != "" ]; then
 	echo -e "$string_c2_25    $status_wrn\n"
 	suggestions="$suggestions sgs_autoindex_module"
 else
@@ -87,7 +88,7 @@ else
 fi
 
 # 2.6 Proxy modules are disabled
-if [ "$(httpd -M | grep proxy_)" != "" ]; then
+if [ "$($apache_bin -M | grep proxy_)" != "" ]; then
 	echo -e "$string_c2_26    $status_wrn\n"
 	suggestions="$suggestions sgs_proxy_module"
 else
@@ -95,7 +96,7 @@ else
 fi
 
 # 2.7 User Directories Modules are disabled
-if [ "$(httpd -M | grep userdir_)" != "" ]; then
+if [ "$($apache_bin -M | grep userdir_)" != "" ]; then
 	echo -e "$string_c2_27    $status_wrn\n"
 	suggestions="$suggestions sgs_user_dir_module"
 else
@@ -103,7 +104,7 @@ else
 fi
 
 # 2.8 Info module is disabled
-if [ '$(httpd -M | egrep "info_module")' != "" ]; then
+if [ '$($apache_bin -M | egrep "info_module")' != "" ]; then
 	echo -e "$string_c2_28    $status_wrn\n"
 	suggestions="$suggestions sgs_info_module"
 else
@@ -143,7 +144,7 @@ else
 	echo -e "$string_c3_31_3    $status_ok"
 fi
 
-if [ $(ps axu | grep httpd | grep -v root | cut -d" " -f1 | grep $apache_user) == "" ]; then
+if [ $(ps axu | grep $apache_bin | grep -v root | cut -d" " -f1 | grep $apache_user) == "" ]; then
 	echo -e "$string_c3_31_4    $status_wrn\n"
 	suggestions="$suggestions sgs_non_root"
 else
