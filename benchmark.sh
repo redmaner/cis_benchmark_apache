@@ -29,7 +29,7 @@ status_ok="[${txtgrn}$string_status_ok${txtrst}]"
 status_wrn="[${txtred}$string_status_warning${txtrst}]"
 
 # Apache 
-apache_bin=apache2
+apache_bin=apache2ctl
 apache_dir=/etc/apache2
 apache_conf=$apache_dir/apache2.conf
 apache_confs=$(grep -i "Include *.conf" $apache_conf | grep -v '#Include')
@@ -72,7 +72,7 @@ else
 fi
 
 # 2.4 Status Module is disabled
-if [ '$($apache_bin -M | egrep "status_module")' != "" ]; then
+if [ "$($apache_bin -M | grep status_module)" != "" ]; then
 	echo -e "$string_c2_24    $status_wrn\n"
 	suggestions="$suggestions sgs_status_module"
 else
@@ -104,7 +104,7 @@ else
 fi
 
 # 2.8 Info module is disabled
-if [ '$($apache_bin -M | egrep "info_module")' != "" ]; then
+if [ "$($apache_bin -M | grep info_module)" != "" ]; then
 	echo -e "$string_c2_28    $status_wrn\n"
 	suggestions="$suggestions sgs_info_module"
 else
