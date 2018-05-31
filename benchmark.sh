@@ -32,10 +32,17 @@ status_wrn="[${txtred}$string_status_warning${txtrst}]"
 apache_bin=apache2ctl
 apache_dir=/etc/apache2
 apache_conf=$apache_dir/apache2.conf
-apache_confs=$(grep -i "Include *.conf" $apache_conf | grep -v '#Include')
+apache_confs=$(grep -i "Include *.conf" $apache_conf | grep -v '#Include')\
 
+# Tmp
+date_tmp=$(date +"%m-%d-%Y-%H-%M-%S")
+tmp_dir="$up/.tmp-$date_tmp"
+tmp_dir_keep_alive=true
+apache_conf_tmp=$tmp_dir/apache.conf
+apache_conf_tmp_status=false
 
-source $up/suggestions.sh
+source $up/scripts/make_tmp_conf.sh
+source $up/scripts/suggestions.sh
 
 # Define suggestions
 suggestions="sgs_auth_modules"
@@ -156,3 +163,8 @@ echo -e "${txtblu}$string_suggestions_title${txtrst}"
 sed "s/ /\n/g" <<< $suggestions | while read sgs; do
 	$sgs
 done
+
+# Remove temporary files
+if [ $tmp_dir_keep_alive == false ]; then
+	rm -rf $tmp_dir
+fi
